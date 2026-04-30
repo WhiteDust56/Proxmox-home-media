@@ -26,19 +26,19 @@ resource "proxmox_virtual_environment_vm" "vm_101" {
   disk {
     # Note: Passed-through disks require custom mappings or manual state linking.
     # passthrough = "/dev/sda1"
-    interface    = "scsi1"
-    size         = 1863
+    interface = "scsi1"
+    size      = 1863
   }
   disk {
     # Note: Passed-through disks require custom mappings or manual state linking.
     # passthrough = "/dev/sdc1"
-    interface    = "scsi2"
-    size         = 1862
+    interface = "scsi2"
+    size      = 1862
   }
   network_device {
-    model = "virtio"
+    model       = "virtio"
     mac_address = "BC:24:11:AD:F4:05"
-    bridge = "vmbr0"
+    bridge      = "vmbr0"
   }
   lifecycle {
     prevent_destroy = true
