@@ -1,6 +1,7 @@
 resource "proxmox_virtual_environment_container" "lxc_104" {
-  node_name = "pve3"
-  vm_id     = 104
+  node_name    = "pve3"
+  vm_id        = 104
+  unprivileged = true
   initialization {
     hostname = "tdarr-node.homeserver.lan"
     ip_config {
@@ -15,11 +16,11 @@ resource "proxmox_virtual_environment_container" "lxc_104" {
   }
   memory {
     dedicated = 3000
-    swap = 1000
+    swap      = 1000
   }
   operating_system {
     template_file_id = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst" # Note: exact template might differ in proxmox
-    type = "ubuntu"
+    type             = "ubuntu"
   }
   mount_point {
     volume = "/mnt/sda1/content/films"
@@ -43,10 +44,10 @@ resource "proxmox_virtual_environment_container" "lxc_104" {
   }
   disk {
     datastore_id = "local-lvm"
-    size = 50
+    size         = 50
   }
   network_interface {
-    name = "eth0"
+    name        = "eth0"
     mac_address = "BC:24:11:2C:C2:C1"
   }
   lifecycle {

@@ -1,6 +1,7 @@
 resource "proxmox_virtual_environment_container" "lxc_112" {
-  node_name = "pv2"
-  vm_id     = 112
+  node_name    = "pv2"
+  vm_id        = 112
+  unprivileged = true
   initialization {
     hostname = "tdarrserver.homeserver.lan"
     ip_config {
@@ -15,11 +16,11 @@ resource "proxmox_virtual_environment_container" "lxc_112" {
   }
   memory {
     dedicated = 6000
-    swap = 3000
+    swap      = 3000
   }
   operating_system {
     template_file_id = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst" # Note: exact template might differ in proxmox
-    type = "ubuntu"
+    type             = "ubuntu"
   }
   mount_point {
     volume = "/mnt/sda1/content/films"
@@ -43,10 +44,10 @@ resource "proxmox_virtual_environment_container" "lxc_112" {
   }
   disk {
     datastore_id = "local-lvm"
-    size = 20
+    size         = 20
   }
   network_interface {
-    name = "eth0"
+    name        = "eth0"
     mac_address = "BC:24:11:93:D8:63"
   }
   lifecycle {
