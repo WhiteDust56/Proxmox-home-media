@@ -40,8 +40,14 @@ jobs:
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
 
+      - name: Terragrunt Init
+        run: terragrunt run-all init --terragrunt-parallelism 1
+        env:
+          TF_VAR_proxmox_endpoint: "https://localhost:8006/"
+          TF_VAR_proxmox_api_token: "dummy-token-for-validation"
+
       - name: Terragrunt Validate
-        run: terragrunt run-all validate
+        run: terragrunt run-all validate --terragrunt-parallelism 1
         env:
           TF_VAR_proxmox_endpoint: "https://localhost:8006/"
           TF_VAR_proxmox_api_token: "dummy-token-for-validation"

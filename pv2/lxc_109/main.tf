@@ -49,6 +49,8 @@ resource "proxmox_virtual_environment_container" "lxc_109" {
     name        = "eth0"
     mac_address = "BC:24:11:6E:33:24"
   }
+  # Security enhancement: Ensures container root user is mapped to an unprivileged user on the host, preventing host compromise.
+  unprivileged = true
   lifecycle {
     prevent_destroy = true
   }
