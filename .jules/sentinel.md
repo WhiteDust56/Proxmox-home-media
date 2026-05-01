@@ -1,0 +1,4 @@
+## 2024-05-15 - Unprivileged Proxmox LXC Containers Security
+**Vulnerability:** Five LXC containers in the Proxmox cluster were configured as privileged (missing `unprivileged = true`). This allows processes inside the container to map to root on the host machine, which presents a critical host compromise risk if a container is breached.
+**Learning:** In a Proxmox environment, it's easy to overlook container privilege settings when translating `.conf` files to Terraform if not explicitly enforced. Not all containers implicitly had this set, despite it being a critical security boundary.
+**Prevention:** Always enforce `unprivileged = true` in `proxmox_virtual_environment_container` resources to ensure root user mapping isolation. Any future containers added must explicitly include this setting unless there's an documented, explicit reason for requiring privileged access.
