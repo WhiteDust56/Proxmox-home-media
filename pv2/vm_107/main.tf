@@ -24,9 +24,9 @@ resource "proxmox_virtual_environment_vm" "vm_107" {
     size         = 32
   }
   network_device {
-    model = "virtio"
+    model       = "virtio"
     mac_address = "BC:24:11:DD:4D:A9"
-    bridge = "vmbr0"
+    bridge      = "vmbr0"
   }
   lifecycle {
     prevent_destroy = true
