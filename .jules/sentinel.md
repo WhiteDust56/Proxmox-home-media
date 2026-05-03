@@ -1,0 +1,4 @@
+## 2024-05-03 - [CRITICAL] Privileged LXC Containers
+**Vulnerability:** Several Proxmox LXC containers (`pve3/lxc_117`, `pve3/lxc_104`, `pve1/lxc_118`, `pv2/lxc_109`, `pv2/lxc_112`) were configured without the `unprivileged = true` setting. Privileged containers run the container root user as the host root user, which presents a significant risk of full host compromise if the container is breached.
+**Learning:** It is crucial to always explicitly define `unprivileged = true` for LXC containers to ensure they map the root user to an unprivileged user on the host, preventing host compromise.
+**Prevention:** Always verify that `unprivileged = true` is set for all `proxmox_virtual_environment_container` resource blocks. This can be enforced via automated checks or careful manual review during PRs.
