@@ -20,6 +20,7 @@ resource "proxmox_virtual_environment_container" "lxc_117" {
     template_file_id = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst" # Note: exact template might differ in proxmox
     type             = "ubuntu"
   }
+  unprivileged = true
   disk {
     datastore_id = "local-lvm"
     size         = 8
