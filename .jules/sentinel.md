@@ -1,0 +1,4 @@
+## 2024-05-04 - Enforce Unprivileged LXC Containers
+**Vulnerability:** Several Proxmox LXC containers (`proxmox_virtual_environment_container`) were missing the `unprivileged = true` setting. This allows the root user inside the container to map directly to the root user on the Proxmox host, creating a critical vulnerability where container compromise leads to full host compromise.
+**Learning:** Container configurations in Terraform must explicitly set `unprivileged = true`. This ensures the container root user is mapped to an unprivileged user on the host, adhering to the principle of least privilege.
+**Prevention:** All current and future LXC containers managed by Terraform must include `unprivileged = true` in their configuration blocks to enforce container isolation.
