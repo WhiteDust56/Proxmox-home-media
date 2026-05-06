@@ -1,0 +1,4 @@
+## 2024-05-06 - [Fix Privileged LXC Containers]
+**Vulnerability:** Found 5 Proxmox LXC containers deployed without the `unprivileged = true` setting. Privileged containers map the root user inside the container directly to the root user on the host. If a process escapes the container, it immediately has root access to the entire Proxmox hypervisor.
+**Learning:** In Proxmox, LXC containers are privileged by default unless explicitly configured otherwise. When defining infrastructure as code with the `bpg/proxmox` provider, the `unprivileged` flag must be explicitly set.
+**Prevention:** Always ensure `unprivileged = true` is included in all `proxmox_virtual_environment_container` resource blocks. This maps the container's root user to an unprivileged user on the host, preventing host compromise in the event of a container escape.
