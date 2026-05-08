@@ -1,3 +1,3 @@
-## 2024-05-23 - Terraform Provider Caching with Terragrunt
-**Learning:** In a codebase with multiple Terraform root modules managed by Terragrunt (like the 28 modules in this repo), running `terragrunt run-all` causes Terraform to individually download the provider for *each* module. This results in significant network overhead, rate limits (like GitHub API timeouts when downloading the proxmox provider), and incredibly slow CI runs.
-**Action:** Always enable `TF_PLUGIN_CACHE_DIR` when using Terragrunt with multiple modules, especially in CI environments, to download providers once and link them, speeding up execution drastically.
+## 2024-05-08 - Use Terragrunt Provider Cache to prevent redundant concurrent downloads
+**Learning:** `TF_PLUGIN_CACHE_DIR` with concurrent `terragrunt run-all` executions causes lock contention, redundant parallel downloads, and errors such as timeouts. Terragrunt provides a native `TERRAGRUNT_PROVIDER_CACHE` feature to correctly serve concurrent runs via a local cache server.
+**Action:** Always use `TERRAGRUNT_PROVIDER_CACHE=1` and `~/.cache/terragrunt/providers` for caching instead of `TF_PLUGIN_CACHE_DIR` when working with a distributed Terraform directory layout orchestrated by Terragrunt `run-all`.
