@@ -1,6 +1,8 @@
 resource "proxmox_virtual_environment_container" "lxc_118" {
-  node_name = "pve1"
-  vm_id     = 118
+  node_name    = "pve1"
+  vm_id        = 118
+  unprivileged = true
+
   initialization {
     hostname = "ttraefik.homeserver.lan"
     ip_config {
