@@ -1,8 +1,6 @@
 resource "proxmox_virtual_environment_container" "lxc_112" {
-  node_name    = "pv2"
-  vm_id        = 112
-  unprivileged = true
-
+  node_name = "pv2"
+  vm_id     = 112
   initialization {
     hostname = "tdarrserver.homeserver.lan"
     ip_config {
