@@ -1,0 +1,4 @@
+## 2026-05-17 - Supply Chain Attack Prevention via Action Pinning
+**Vulnerability:** GitHub Actions workflows were using mutable version tags (`@v3`, `@v4`) for sensitive steps like `actions/checkout` and `hashicorp/setup-terraform`. This allows attackers to silently replace the contents of a tag with malicious code, leading to arbitrary code execution in the CI/CD pipeline.
+**Learning:** Using mutable tags in GitHub Actions is a significant supply chain vulnerability, as tags can be updated retroactively. Always using exact, immutable commit SHAs is required to prevent silent supply chain compromise.
+**Prevention:** Pin all GitHub Actions to specific, immutable commit SHAs (e.g., `uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5`) rather than version tags, and use tools like `git ls-remote` to determine the accurate SHA.
