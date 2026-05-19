@@ -1,0 +1,4 @@
+## 2024-05-19 - Supply Chain Vulnerability via Mutable GitHub Action Tags
+**Vulnerability:** GitHub Actions workflow in `.github/workflows/terraform.yml` used mutable version tags (e.g., `@v4`, `@v3`) for actions (`actions/checkout`, `hashicorp/setup-terraform`, `autero1/action-terragrunt`, `actions/cache`). This allowed the potential execution of malicious code if a third-party action's tag was overwritten by an attacker.
+**Learning:** Pinning GitHub Actions to mutable version tags is a supply chain vulnerability because the underlying code for a tag can be changed at any time without user intervention, meaning untrusted or malicious updates can be automatically pulled into the CI/CD pipeline.
+**Prevention:** Pin all GitHub Actions in workflow files to specific, immutable commit SHAs instead of mutable version tags to ensure the exact version of the action is always executed.
