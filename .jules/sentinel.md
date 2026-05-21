@@ -1,0 +1,4 @@
+## 2024-05-22 - Retroactive Unprivileged Flag Application Causes Data Loss
+**Vulnerability:** Several LXC containers are missing the `unprivileged = true` setting, which is a significant security risk as it runs containers as privileged. However, attempting to fix this by retroactively adding the flag to live containers causes Terraform to immutable recreate (destroy and replace) them, resulting in complete data loss.
+**Learning:** In Proxmox, the unprivileged status of a container is immutable once created. Terraform forces a replacement if this flag is changed. Fixing this security issue requires a careful migration strategy rather than a simple code update.
+**Prevention:** Never add or change the `unprivileged` flag on existing `proxmox_virtual_environment_container` resources without authorization and a proper backup/restore strategy. All new LXC containers must be instantiated with this flag set to true.
