@@ -3,3 +3,6 @@
 *.tfstate
 *.tfstate.backup
 provider.tf
+
+# Prevent leak of binary downloads and provider cache
+.cache/
