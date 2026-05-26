@@ -1,0 +1,4 @@
+## 2024-05-26 - Immutable GitHub Actions Workflow Actions
+**Vulnerability:** The `.github/workflows/terraform.yml` file uses mutable version tags (e.g., `@v4`, `@v3`) for GitHub Actions (like `actions/checkout`, `hashicorp/setup-terraform`, `autero1/action-terragrunt`, `actions/cache`), which poses a supply chain attack risk if a tag is modified to point to a malicious commit.
+**Learning:** Pinning GitHub Actions to specific, immutable commit SHAs guarantees the execution of the exact expected code, preventing unexpected or malicious changes from compromising the CI/CD pipeline.
+**Prevention:** Always reference GitHub Actions by their full commit SHA instead of mutable tags (like `@v3`), using comments to indicate the tagged version for clarity.
