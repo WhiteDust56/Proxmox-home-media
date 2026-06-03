@@ -1,0 +1,5 @@
+## 2024-06-04 - Prevent Supply Chain Attacks in CI/CD and avoid CI race conditions
+
+**Vulnerability:** GitHub Action versions were pinned using mutable tags (e.g., `@v4`) rather than immutable commit SHAs. In addition, Terragrunt provider caching was misconfigured to use `$HOME` and Terraform plugin cache instead of Terragrunt's native provider cache with the GitHub workspace path.
+**Learning:** Using mutable tags for third-party actions in CI/CD workflows introduces the risk of supply chain attacks since tags can be moved by the repository maintainer to malicious commits. Additionally, misconfigured cache paths (e.g. `$HOME` vs `${{ github.workspace }}`) in the `actions/cache` action can lead to cache misses and corrupt installations, and Terragrunt handles concurrency/caching differently than pure Terraform.
+**Prevention:** Always pin GitHub Actions to specific, immutable commit SHAs using `git ls-remote`. When caching Terragrunt providers in GitHub Actions, explicitly use `${{ github.workspace }}/.cache/terragrunt/providers` for both `TERRAGRUNT_PROVIDER_CACHE_DIR` and the `actions/cache` path, and set `TERRAGRUNT_PROVIDER_CACHE=1`.
