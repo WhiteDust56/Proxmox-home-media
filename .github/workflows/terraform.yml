@@ -31,7 +31,7 @@ jobs:
           echo "TERRAGRUNT_PROVIDER_CACHE=1" >> $GITHUB_ENV
 
       - name: Cache Terragrunt Providers
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
         with:
           path: ${{ github.workspace }}/.cache/terragrunt/providers
           key: terraform-plugin-cache-${{ runner.os }}-${{ hashFiles('terragrunt.hcl') }}
