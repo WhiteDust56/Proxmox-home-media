@@ -1,0 +1,4 @@
+## 2026-06-28 - Pin GitHub Actions to Immutable Commit SHAs
+**Vulnerability:** GitHub Actions in CI/CD workflows were using mutable version tags (e.g., `@v4`, `@v3`). This is a supply chain vulnerability where a malicious actor could compromise the action repository, overwrite the mutable tag, and execute arbitrary code in the CI environment with elevated privileges.
+**Learning:** Always pin third-party GitHub Actions to specific, immutable commit SHAs instead of version tags to ensure the exact code executed is known and cannot be altered maliciously without notice.
+**Prevention:** Use `git ls-remote --tags <repo_url>` to find the SHA corresponding to the latest minor/patch release of the desired major version, and reference it via `@<SHA>`. Include the version tag as a comment for readability (e.g., `@<SHA> # v4.3.0`).
