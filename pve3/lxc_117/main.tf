@@ -1,6 +1,7 @@
 resource "proxmox_virtual_environment_container" "lxc_117" {
-  node_name = "pve3"
-  vm_id     = 117
+  node_name    = "pve3"
+  vm_id        = 117
+  unprivileged = true
   initialization {
     hostname = "llm1.homeserver.lan"
     ip_config {

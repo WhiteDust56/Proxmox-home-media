@@ -1,6 +1,7 @@
 resource "proxmox_virtual_environment_container" "lxc_109" {
-  node_name = "pv2"
-  vm_id     = 109
+  node_name    = "pv2"
+  vm_id        = 109
+  unprivileged = true
   initialization {
     hostname = "plexeinternal.homeserver.lan"
     ip_config {
