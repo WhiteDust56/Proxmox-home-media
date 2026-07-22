@@ -1,6 +1,7 @@
 resource "proxmox_virtual_environment_container" "lxc_104" {
-  node_name = "pve3"
-  vm_id     = 104
+  unprivileged = true
+  node_name    = "pve3"
+  vm_id        = 104
   initialization {
     hostname = "tdarr-node.homeserver.lan"
     ip_config {
